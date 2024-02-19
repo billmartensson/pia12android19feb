@@ -11,11 +11,14 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun Welcome(
+    stuffvm : StuffViewModel,
     goReadmore : (fruit : String) -> Unit,
     goFancy : () -> Unit
 ) {
     Column {
         Text("Welcome", modifier = Modifier.background(Color.White))
+
+        Text(stuffvm.sometext)
 
         Button(onClick = {
             goReadmore("Kiwi")
@@ -27,6 +30,11 @@ fun Welcome(
         }) {
             Text("Fancy")
         }
+        Button(onClick = {
+            stuffvm.loadsome()
+        }) {
+            Text("LOAD")
+        }
     }
 }
 
@@ -34,5 +42,5 @@ fun Welcome(
 @Preview
 @Composable
 fun WelcomePreview() {
-    Welcome(goReadmore = {}, goFancy = {})
+    Welcome(StuffViewModel(), goReadmore = {}, goFancy = {})
 }

@@ -10,9 +10,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun Readmore(fruit : String, goFancy : () -> Unit) {
+fun Readmore(stuffVM : StuffViewModel, fruit : String, goFancy : () -> Unit) {
     Column {
         Text("Read more $fruit", modifier = Modifier.background(Color.White))
+
+        Text(stuffVM.sometext)
 
         Button(onClick = {
             goFancy()
@@ -26,7 +28,7 @@ fun Readmore(fruit : String, goFancy : () -> Unit) {
 @Preview
 @Composable
 fun ReadmorePreview() {
-    Readmore("ABC", goFancy = {})
+    Readmore(StuffViewModel(), "ABC", goFancy = {})
 }
 
 

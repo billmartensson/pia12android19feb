@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 
 class StuffViewModel : ViewModel() {
 
-    var currentuser = ""
+    var sometext = "XXXXXX"
 
-    fun loadproducts() {
-
+    fun loadsome() {
+        sometext = "Hej"
     }
 }

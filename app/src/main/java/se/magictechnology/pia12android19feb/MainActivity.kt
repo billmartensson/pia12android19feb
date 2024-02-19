@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,11 +43,13 @@ enum class NavScreen() {
 
 @Composable
 fun AppNavHost(
-    navController : NavHostController = rememberNavController()
+    navController : NavHostController = rememberNavController(),
+    stuffVM : StuffViewModel = viewModel()
 ) {
     NavHost(navController = navController, startDestination = NavScreen.Welcome.name) {
         composable(NavScreen.Welcome.name) {
             Welcome(
+                stuffVM,
                 goReadmore = {
                     navController.navigate(NavScreen.Readmore.name + "/" + it)
                  },
@@ -55,7 +58,7 @@ fun AppNavHost(
         }
         composable(NavScreen.Readmore.name + "/{fruitname}") {
             val thefruit = it.arguments?.getString("fruitname")
-            Readmore(fruit = thefruit!!, goFancy = { navController.navigate(NavScreen.Fancy.name) })
+            Readmore(stuffVM, fruit = thefruit!!, goFancy = { navController.navigate(NavScreen.Fancy.name) })
         }
         composable(NavScreen.Fancy.name) {
             Text("Fancy")
